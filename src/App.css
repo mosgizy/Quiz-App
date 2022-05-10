@@ -20,9 +20,6 @@
     box-sizing: border-box;
 }
 
-body{
-}
-
 main{
     display: grid;
     place-items: center;
@@ -46,8 +43,13 @@ h1{
     color: var(--text-color);
     padding: 2rem 3rem;
     border-radius: .5rem;
-    width: var(--width);
     box-shadow: 0 4px 25px rgba(0, 0, 0, .8);
+}
+
+@media only screen and (min-width: 768px){
+    .wrapper{
+        width: var(--width);
+    }
 }
 
 .form-header{
@@ -154,12 +156,6 @@ select,
 }
 
 /* form style ends here */
-.question-wrapper{
-    width:960px;
-    min-width: 375px;
-    max-width: 1200px;
-}
-
 .score{
     color: var(--secondary-color);
     text-align: right;
@@ -191,8 +187,6 @@ select,
 
 /* questions styles end here */
 .modal-wrapper{
-    /* width: 100%;
-    height: 100%; */
     position: absolute;
     inset: 0;
 }
@@ -203,18 +197,13 @@ select,
     left: 50%;
     transform: translate(-50%);
     z-index: 10;
-    /* box-shadow:0 0 2000px 2000px rgba(0,0,0,.5); */
 }
 
 .overlay{
-    /* position: absolute;
-    width:100%;
-    border: 1px solid red; */
     background-color: rgba(0, 0, 0, .6);
     position: absolute;
     inset:0;
     z-index: 5;
-    /* border: 41px solid red; */
 }
 
 .result{

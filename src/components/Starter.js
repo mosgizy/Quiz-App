@@ -5,9 +5,7 @@ import { fetchData } from '../functions/fetchApi'
 import { useSelector } from 'react-redux'
 import Loader from './Loader'
 
-const baseUrl = "https://quizapi.io/api/v1/questions?apiKey=miClj2mXuYSChEpOMarwgDCw2OG2cDepiWsKyh7T"
-
-// const tempUrl = "https://quizapi.io/api/v1/questions?apiKey=miClj2mXuYSChEpOMarwgDCw2OG2cDepiWsKyh7T&category=linux&difficulty=Easy&limit=10&tags=DevOps"
+const baseUrl = `https://quizapi.io/api/v1/questions?apiKey=${process.env.REACT_APP_API_KEY}`
 
 const Starter = () => {
   const dispatch = useDispatch()
