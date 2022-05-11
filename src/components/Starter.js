@@ -7,6 +7,8 @@ import Loader from './Loader'
 
 const baseUrl = `https://quizapi.io/api/v1/questions?apiKey=${process.env.REACT_APP_API_KEY}`
 
+console.log(process.env.REACT_APP_API_KEY)
+
 const Starter = () => {
   const dispatch = useDispatch()
   const {loading,displayQuestion} = useSelector((state) => state.question.value)
