@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { loadQuestion } from '../features/question'
 import { fetchData } from '../functions/fetchApi'
@@ -7,22 +7,20 @@ import Loader from './Loader'
 
 const baseUrl = `https://quizapi.io/api/v1/questions?apiKey=${process.env.REACT_APP_API_KEY}`
 
-console.log(process.env.REACT_APP_API_KEY)
-
 const Starter = () => {
   const dispatch = useDispatch()
-  const {loading,displayQuestion} = useSelector((state) => state.question.value)
+  const { loading, displayQuestion } = useSelector((state) => state.question.value)
   const [parameters, setParameters] = useState({
     amount: 10, category: "", difficulty: "", tags: ""
   })
   const [tags, setTag] = useState(["DevOps", "Docker", "Javascript", "Kubernates", "HTML", "Laravel", "Mysql", "Linux", "Wordpress", "PHP"])
   const [tagCopy, setTagCopy] = useState(tags)
-  const [error,setError] = useState(false)
+  const [error, setError] = useState(false)
 
   const tagRef = useRef(null)
   const tagsRef = useRef(null)
-  
-  const categories = ["linux","bash","uncategorized","sql","cms","devops","code"]
+
+  const categories = ["linux", "bash", "uncategorized", "sql", "cms", "devops", "code"]
 
   // handle the submit of the form which fetch the api then load the question
 
@@ -32,7 +30,7 @@ const Starter = () => {
 
     dispatch(loadQuestion({ questions: [], loading: true, displayQuestion: false }))
     fetchData(url).then(response => {
-      response === "ERR_NETWORK" ? dispatch(loadQuestion({ questions: [], loading: false, displayQuestion: false })): dispatch(loadQuestion({questions:[...response],loading:false,displayQuestion:true}))
+      response === "ERR_NETWORK" ? dispatch(loadQuestion({ questions: [], loading: false, displayQuestion: false })) : dispatch(loadQuestion({ questions: [...response], loading: false, displayQuestion: true }))
 
       response === "ERR_NETWORK" && setError(true)
     })
@@ -42,10 +40,10 @@ const Starter = () => {
 
   const getParameters = (name, value) => {
     setParameters(() => {
-        return {
-          ...parameters,
-          [name]: value
-        }
+      return {
+        ...parameters,
+        [name]: value
+      }
     })
   }
 
@@ -55,7 +53,7 @@ const Starter = () => {
     setParameters(() => {
       return {
         ...parameters,
-        tags:search
+        tags: search
       }
     })
 
@@ -93,7 +91,7 @@ const Starter = () => {
       <form className='form'>
         <div className="input-wrapper">
           <label htmlFor="number-of-questions">number of questions</label>
-          <input type="number" name='number-of-questions' id='number-of-questions' value={parameters.amount} onChange={(e) => getParameters("amount",e.target.value)} />
+          <input type="number" name='number-of-questions' id='number-of-questions' value={parameters.amount} onChange={(e) => getParameters("amount", e.target.value)} />
         </div>
         <div className="input-wrapper">
           <label htmlFor="category">category</label>
@@ -101,7 +99,7 @@ const Starter = () => {
             <option value="any category" defaultValue>any category</option>
             {
               categories.map((category, index) => {
-                return <option key={index} value="category" defaultValue>{ category}</option>
+                return <option key={index} value="category" defaultValue>{category}</option>
               })
             }
           </select>
@@ -123,13 +121,13 @@ const Starter = () => {
             <div ref={tagRef} className="input-choice"></div>
             <input type="text" name='tags' id='tags' value={parameters.tags} onChange={(e) => getTag(e.target.value)} onClick={(e) => showTags(e)} />
           </div>
-            <div ref={tagsRef} className="tag-wrapper hide">
-              {
-                tags.length > 0 ? tags.map((tag, index) => {
-                  return <div key={index} onClick={() => addTag(tag)} className="tag-choice">{tag}</div>
-                }) : <div> no choice to choose from</div>
-              }
-            </div>
+          <div ref={tagsRef} className="tag-wrapper hide">
+            {
+              tags.length > 0 ? tags.map((tag, index) => {
+                return <div key={index} onClick={() => addTag(tag)} className="tag-choice">{tag}</div>
+              }) : <div> no choice to choose from</div>
+            }
+          </div>
         </div>
 
         <button className='btn submit' onClick={handleSubmit}>play now</button>
